@@ -9,23 +9,38 @@ export default (question, questionIndex, currentQuestion, setCurrentQuestion, ad
   console.info('question', question);
   const q = question.question;
 
+  const ordinal_suffix_of = i => {
+    const j = i % 10,
+        k = i % 100;
+    if (j === 1 && k !== 11) {
+        return i + "st";
+    }
+    if (j === 2 && k !== 12) {
+        return i + "nd";
+    }
+    if (j === 3 && k !== 13) {
+        return i + "rd";
+    }
+    return i + "th";
+  }
+
   const getChoices = choices => {
     if (choices.length === 3 && choices[0] === 'bad') {
       return (
         <React.Fragment>
-          <IconButton aria-label="Very Dissatisfied">
+          <IconButton aria-label="Very Dissatisfied" onClick={() => answer(ordinal_suffix_of(1))}>
             <SentimentVeryDissatisfiedIcon color="secondary" fontSize="large" />
           </IconButton>
-          <IconButton aria-label="Very Dissatisfied">
+          <IconButton aria-label="Dissatisfied" onClick={() => answer(ordinal_suffix_of(2))}>
             <SentimentDissatisfiedIcon color="secondary" fontSize="large" />
           </IconButton>
-          <IconButton aria-label="Very Dissatisfied">
+          <IconButton aria-label="Very Satisfied" onClick={() => answer(ordinal_suffix_of(3))}>
             <SentimentVerySatisfiedIcon color="secondary" fontSize="large" />
           </IconButton>
         </React.Fragment>
       );
     }
-    return choices.map(choice => <Button key={choice} variant="contained">{choice}</Button>);
+    return choices.map((choice, i) => <Button key={choice} variant="contained" onClick={() => answer(ordinal_suffix_of(i + 1))}>{choice}</Button>);
   }
 
   const answer = ans => {

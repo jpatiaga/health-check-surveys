@@ -76,23 +76,6 @@
     }
   ],
   "survey-responses": [
-    [
-      {
-        "answer": "NO",
-        "questionId": "bd2cbad1-6ccf-48e3-bb92-bc9961bc0110",
-        "questionName": "Have you had enough rest?",
-        "questionText": "",
-        "questionType": "YES_NO",
-        "expectedAnswer": "YES"
-      },
-      {
-        "answer": "NO",
-        "questionId": "b5e2cf01-8bb6-4fcd-ad88-0efb611195d0",
-        "questionName": "Have you completed your pre-trip documentation?",
-        "questionText": "",
-        "questionType": "YES_NO",
-        "expectedAnswer": "YES"
-      }
-    ]
+    
   ]
 }
