@@ -8,7 +8,7 @@ import red from '@material-ui/core/colors/red';
 import blue from '@material-ui/core/colors/blue';
 import Grid from '@material-ui/core/Grid';
 import Survey from './components/survey/Survey';
-import { GET_SURVEYS_URL, POST_SURVEY_RESULT_URL } from './constants';
+import { GET_SURVEYS_URL, POST_SURVEY_RESULT_URL, AUTHORIZATION } from './constants';
 
 class App extends React.Component {
   initialState = {
@@ -22,8 +22,13 @@ class App extends React.Component {
   }
 
   fetchData() {
-    fetch(GET_SURVEYS_URL)
-      .then(response => response.json())
+    fetch(GET_SURVEYS_URL, {
+      method: 'GET',
+      mode: 'cors', // no-cors, *cors, same-origin
+      headers: {
+        'authorization': AUTHORIZATION
+      }
+    }).then(response => response.json())
       .then(data => this.setState({surveys: data}));
   }
 
@@ -52,8 +57,8 @@ class App extends React.Component {
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
         credentials: 'same-origin', // include, *same-origin, omit
         headers: {
-          'Content-Type': 'application/json'
-          // 'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
+          'authorization': AUTHORIZATION
         },
         redirect: 'follow', // manual, *follow, error
         referrerPolicy: 'no-referrer', // no-referrer, *client
