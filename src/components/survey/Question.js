@@ -81,7 +81,7 @@ export default (question, questionIndex, currentQuestion, setCurrentQuestion, ad
       break;
     default:
       answerButtons = (
-        <Button variant="contained">OK</Button>
+        <Button variant="contained" onClick={() => answer('ACK')}>OK</Button>
       );
   }
 
