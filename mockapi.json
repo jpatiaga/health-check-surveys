@@ -6,7 +6,7 @@
       "active": true,
       "version": 1,
       "created": "1585807119",
-      "lastModified": "1585807119", 
+      "lastModified": "1585807119",
       "versionId": "",
       "questions": [
         {
@@ -17,7 +17,11 @@
           "active": true,
           "expectedAnswer": "3rd",
           "created": "1585807119",
-          "choices": ["bad", "average", "good"]
+          "choices": [
+            "bad",
+            "average",
+            "good"
+          ]
         },
         {
           "id": "b5e2cf01-8bb6-4fcd-ad88-0efb611195da",
@@ -30,7 +34,9 @@
           "choices": []
         }
       ],
-      "fleetIds": ["caa8b54a-eb5e-4134-8ae2-a3946a428ec7"],
+      "fleetIds": [
+        "caa8b54a-eb5e-4134-8ae2-a3946a428ec7"
+      ],
       "type": "WEB"
     },
     {
@@ -39,7 +45,7 @@
       "active": true,
       "version": 1,
       "created": "1585807119",
-      "lastModified": "1585807119", 
+      "lastModified": "1585807119",
       "versionId": "",
       "questions": [
         {
@@ -63,8 +69,30 @@
           "choices": []
         }
       ],
-      "fleetIds": ["caa8b54a-eb5e-4134-8ae2-a3946a428ec7"],
+      "fleetIds": [
+        "caa8b54a-eb5e-4134-8ae2-a3946a428ec7"
+      ],
       "type": "WEB"
     }
+  ],
+  "survey-responses": [
+    [
+      {
+        "answer": "NO",
+        "questionId": "bd2cbad1-6ccf-48e3-bb92-bc9961bc0110",
+        "questionName": "Have you had enough rest?",
+        "questionText": "",
+        "questionType": "YES_NO",
+        "expectedAnswer": "YES"
+      },
+      {
+        "answer": "NO",
+        "questionId": "b5e2cf01-8bb6-4fcd-ad88-0efb611195d0",
+        "questionName": "Have you completed your pre-trip documentation?",
+        "questionText": "",
+        "questionType": "YES_NO",
+        "expectedAnswer": "YES"
+      }
+    ]
   ]
 }

@@ -2,15 +2,13 @@ import React from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import './App.css';
 import logo from './eroad_logo.png';
-import { CssBaseline, AppBar, Typography, Button, IconButton } from '@material-ui/core';
+import { CssBaseline, AppBar, Typography, Button } from '@material-ui/core';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import red from '@material-ui/core/colors/red';
 import blue from '@material-ui/core/colors/blue';
-import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
-import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
-import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
+import Survey from './components/survey/Survey';
+import { GET_SURVEYS_URL, POST_SURVEY_RESULT_URL } from './constants';
 
 class App extends React.Component {
   initialState = {
@@ -24,7 +22,7 @@ class App extends React.Component {
   }
 
   fetchData() {
-    fetch('http://localhost:3001/surveys')
+    fetch(GET_SURVEYS_URL)
       .then(response => response.json())
       .then(data => this.setState({surveys: data}));
   }
@@ -39,6 +37,39 @@ class App extends React.Component {
 
   getActiveSurvey() {
     return this.getSurvey(this.state.activeSurveyId);
+  }
+
+  reset() {
+    this.setState(this.initialState, this.fetchData);
+  }
+
+  postSurveyResult(surveyResult) {
+    async function postData(url = '', data = {}) {
+      // Default options are marked with *
+      const response = await fetch(url, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrerPolicy: 'no-referrer', // no-referrer, *client
+        body: JSON.stringify(data) // body data type must match "Content-Type" header
+      });
+      return await response.json(); // parses JSON response into native JavaScript objects
+    };
+
+    console.info('posting', surveyResult);
+
+    postData(POST_SURVEY_RESULT_URL, surveyResult)
+      .then((data) => {
+        console.log('post response', data); // JSON data parsed by `response.json()` call
+      });
+
+    this.reset();
   }
   
   render() {
@@ -55,7 +86,7 @@ class App extends React.Component {
         <ThemeProvider theme={theme}>
           <AppBar position="relative" color="primary">
             <Toolbar>
-              <img src={logo} alt="" className="logo" onClick={() => this.setState(this.initialState, this.fetchData)} />
+              <img src={logo} alt="" className="logo" onClick={() => this.reset()} />
               <Typography variant="h6" color="inherit" noWrap>
                 EROAD {this.state.activeSurveyId ? `– ${this.getActiveSurvey().name}` : ''}
               </Typography>
@@ -63,39 +94,7 @@ class App extends React.Component {
           </AppBar>
           <main>
             {this.state.activeSurveyId ?
-              <Container maxWidth="lg">
-                <Grid container spacing={4} className="survey">
-                  <Grid container spacing={2} className="question">
-                    <Grid item xs="12" md="8">
-                      <Typography variant="h6" color="inherit">
-                        How are you feeling today?
-                      </Typography>
-                    </Grid>
-                    <Grid item xs="12" md="4" className="center">
-                      <IconButton aria-label="Very Dissatisfied">
-                        <SentimentVeryDissatisfiedIcon color="secondary" fontSize="large" />
-                      </IconButton>
-                      <IconButton aria-label="Very Dissatisfied">
-                        <SentimentDissatisfiedIcon color="secondary" fontSize="large" />
-                      </IconButton>
-                      <IconButton aria-label="Very Dissatisfied">
-                        <SentimentVerySatisfiedIcon color="secondary" fontSize="large" />
-                      </IconButton>
-                    </Grid>
-                  </Grid>
-                  <Grid container spacing={2} className="question">
-                    <Grid item xs="12" md="8">
-                      <Typography variant="h6" color="inherit">
-                        Do you currently have fever of 38&#8451; or more?
-                      </Typography>
-                    </Grid>
-                    <Grid item xs="12" md="4" className="center">
-                      <Button variant="contained">No</Button>
-                      <Button variant="contained">Yes</Button>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Container>
+              <Survey survey={this.getActiveSurvey()} postSurveyResult={this.postSurveyResult.bind(this)} />
               :
               <React.Fragment>
                 <Typography variant="h6" color="inherit">
@@ -104,8 +103,8 @@ class App extends React.Component {
                 <br />
                 <Grid container spacing={2}>
                   {this.state.surveys.map(survey => 
-                    <Grid item xs="12">
-                      <Button key={survey.id} variant="outlined" onClick={(target) => this.setState({activeSurveyId: survey.id})}>{survey.name}</Button>
+                    <Grid key={survey.id} item xs={12}>
+                      <Button variant="outlined" onClick={(target) => this.setState({activeSurveyId: survey.id})}>{survey.name}</Button>
                     </Grid>
                   )}
                 </Grid>
