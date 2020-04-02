@@ -13,12 +13,13 @@ import { GET_SURVEYS_URL, POST_SURVEY_RESULT_URL, AUTHORIZATION } from './consta
 class App extends React.Component {
   initialState = {
     surveys: [],
-    activeSurveyId: null
+    activeSurveyId: null,
+    loginTime: null,
   }
 
   constructor(props) {
     super(props);
-    this.state = this.initialState;
+    this.state = {...this.initialState, loginTime: Math.floor(Date.now() / 1000)};
   }
 
   fetchData() {
@@ -46,9 +47,10 @@ class App extends React.Component {
 
   reset() {
     this.setState(this.initialState, this.fetchData);
+    this.setState({loginTime: Math.floor(Date.now() / 1000)});
   }
 
-  postSurveyResult(surveyResult) {
+  postSurveyResult(survey, surveyResult) {
     async function postData(url = '', data = {}) {
       // Default options are marked with *
       const response = await fetch(url, {
@@ -67,9 +69,18 @@ class App extends React.Component {
       return await response.json(); // parses JSON response into native JavaScript objects
     };
 
-    console.info('posting', surveyResult);
+    const resultObject = {
+      "surveyVersionId": survey.versionId,
+      "driverId": null,
+      "completedTime": Math.floor(Date.now() / 1000),
+      "loginTime": this.state.loginTime,
+      "questionResponses": surveyResult
+    };
 
-    postData(POST_SURVEY_RESULT_URL, surveyResult)
+    console.info('survey', survey);
+    console.info('posting', resultObject);
+
+    postData(POST_SURVEY_RESULT_URL, resultObject)
       .then((data) => {
         console.log('post response', data); // JSON data parsed by `response.json()` call
       });

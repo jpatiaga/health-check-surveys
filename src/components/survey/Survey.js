@@ -25,7 +25,7 @@ export default (survey, postSurveyResult) => {
             </Typography>
           </Grid>
           <Grid item xs={12} className="center">
-            <Button variant="contained" color="secondary" onClick={() => survey.postSurveyResult(questionResponses)}>Submit</Button>
+            <Button variant="contained" color="secondary" onClick={() => survey.postSurveyResult(s, questionResponses)}>Submit</Button>
           </Grid>
         </Grid>
       </Container>

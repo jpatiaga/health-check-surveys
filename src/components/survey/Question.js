@@ -55,12 +55,13 @@ export default (question, questionIndex, currentQuestion, setCurrentQuestion, ad
 
   const answer = ans => {
     const ansObject = {
-      "answer": ans,
+      // "answer": ans,
       "questionId": q.id,
-      "questionName": q.name,
-      "questionText": '',
-      "questionType": q.type,
-      "expectedAnswer": q.expectedAnswer
+      // "questionName": q.name,
+      // "questionText": '',
+      // "questionType": q.type,
+      // "expectedAnswer": q.expectedAnswer
+      "response": ans
     };
     question.addQuestionResponse(ansObject);
   }
