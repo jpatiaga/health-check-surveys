@@ -1,0 +1,70 @@
+{
+  "surveys": [
+    {
+      "id": "20354d7a-e4fe-47af-8ff6-187bca92f3f9",
+      "name": "HealthCheck",
+      "active": true,
+      "version": 1,
+      "created": "1585807119",
+      "lastModified": "1585807119", 
+      "versionId": "",
+      "questions": [
+        {
+          "id": "bd2cbad1-6ccf-48e3-bb92-bc9961bc011e",
+          "name": "How are you feeling today?",
+          "text": "",
+          "type": "CHOICES",
+          "active": true,
+          "expectedAnswer": "3rd",
+          "created": "1585807119",
+          "choices": ["bad", "average", "good"]
+        },
+        {
+          "id": "b5e2cf01-8bb6-4fcd-ad88-0efb611195da",
+          "name": "Do you currently have a fever of 38 degrees or more?",
+          "text": "",
+          "type": "YES_NO",
+          "active": true,
+          "expectedAnswer": "NO",
+          "created": "1585807119",
+          "choices": []
+        }
+      ],
+      "fleetIds": ["caa8b54a-eb5e-4134-8ae2-a3946a428ec7"],
+      "type": "WEB"
+    },
+    {
+      "id": "20354d7a-e4fe-47af-8ff6-187bca92f3f1",
+      "name": "April pre-trip",
+      "active": true,
+      "version": 1,
+      "created": "1585807119",
+      "lastModified": "1585807119", 
+      "versionId": "",
+      "questions": [
+        {
+          "id": "bd2cbad1-6ccf-48e3-bb92-bc9961bc0110",
+          "name": "Have you had enough rest?",
+          "text": "",
+          "type": "YES_NO",
+          "active": true,
+          "expectedAnswer": "YES",
+          "created": "1585807119",
+          "choices": []
+        },
+        {
+          "id": "b5e2cf01-8bb6-4fcd-ad88-0efb611195d0",
+          "name": "Have you completed your pre-trip documentation?",
+          "text": "",
+          "type": "YES_NO",
+          "active": true,
+          "expectedAnswer": "YES",
+          "created": "1585807119",
+          "choices": []
+        }
+      ],
+      "fleetIds": ["caa8b54a-eb5e-4134-8ae2-a3946a428ec7"],
+      "type": "WEB"
+    }
+  ]
+}
