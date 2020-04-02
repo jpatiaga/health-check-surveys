@@ -32,6 +32,16 @@
           "expectedAnswer": "NO",
           "created": "1585807119",
           "choices": []
+        },
+        {
+          "id": "b5e2cf01-8bb6-4fcd-ad88-0efb611195d3",
+          "name": "Have you had contact with someone who has been confirmed with COVID-19?",
+          "text": "",
+          "type": "YES_NO",
+          "active": true,
+          "expectedAnswer": "NO",
+          "created": "1585807119",
+          "choices": []
         }
       ],
       "fleetIds": [
